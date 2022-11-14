@@ -1,0 +1,58 @@
+Github Link
+
+## Leading Question 
+
+Our group has decided on analyzing the airplane system in order to learn more about optimal routes between desired locations. We would like to be able to provide an algorithm or method that is able to provide shortest time paths between desired locations. We believe that it would be very interesting to analyze this sort of data and learn more about how a complex system of air routes and traffic and roads functions. We hope to be able to use the vast amount of data and information provided with each point to be able to provide the user with the most frictionless flight order to get to a desired location. It is often difficult to get your flight data in order, for instance if your connections become out of sync due to a delay or you are stuck with a 24 hour layover. We hope to be able to make a system that will show the user the most optimal way to reach their location.
+
+## Dataset Acquisition
+
+
+We will be using the routes database that is provided with the open flights website. This data set provides very useful information such as the following: Airline, Airline ID, Soure airport, destination airport, number of stops as well as the equipment used for the flight. This information will allow us to be able to analyze the amount of “friction” that it will take to move from one location to the other. We consider friction to be the amount of stops that occur between flights, as well as the overall amount of time that the user will be in transit.
+
+## Data Format
+
+The dataset that we are provided is a simple text file that lists the information associated with each route separated by a comma. The source for the route information is pulled directly from a source called Airline Route Mapper, that is able to provide basic information between two airlines. Additionally, OpenFlights goes a step further and removes duplicates as well as verification on the data. We plan to use a subset of the data, excluding the codeshare, equipment components of the data. The dataset is roughly 2 MB and contains information on over 65,000 routes between 3,000+ airports and 548 airlines.
+
+
+## Data Correction
+
+The codeshare component of the data is the only entry that could contain an empty value, which we are omitting regardless. Other than this component, no other date entries should be empty. Thus if we ever encounter an empty value we should omit the data entry entirely as it is an invalid entry. We should confirm that each airport ID corresponds to the correct airport using a map or some other data structure. Two ID’s should not point to the same airport. This same principle applies to source airports, airline, and destination airports. 
+We will also need to confirm that the airport IDs that are provided are legitimate and correspond to an airport, either defined by Open Flights or a three letter code. Finally, the number of stops variable should always be greater than or equal to 0, meaning we should never encounter a value less than zero, while the maximum number of stops should be no greater than the total number of airports in the graph.
+
+## Data Storage
+
+We first will be using a map where the key will be the airport ID and the value will be the airport in order to execute the checks described above. Traversing through any map will take O(n) time to check for unique mappings, but accessing a specific port by ID will take O(1) time. We can also use graphs to utilize edges as ways to signify the connection between airports. Using this graph, we can use a shortest path algorithm like Dijkstra’s algorithm to get the shortest path between locations. This algorithm takes O(V^2) run time, so the amount of airports squared. This algorithm uses a visited set within it 
+
+We are planning on storing the graph in a similar way as the most recent lab that we have done, storing the graph as an object with certain data values. One of these values will be the map that we have which will correspond to an adjacency matrix. The map will make up the main component of our graph storage and will store the origin airport, as well as the locations that it connects to and the relative time it takes - this will be the weighted edges of the graph.
+
+We should contain objects that we define ourselves, just as the ML lab defined a vertex. Ideally, we would have airport objects that can connect to one another. An airport will contain the data that is provided to us, including the name and id as well as other useful information - amount of connecting airports?
+## Algorithm 
+ 
+We will have to take the data we acquired and turn it first into a graph. We will do this by making each vertex the airport ID and loop through each route from the airport and map it as an edge to the destination airport. The weight on each will be the shortest flight time, found by going through each flight between the 2 locations and storing a minimum value that will then be the weight on that edge. This graph will then be inputted into Dijkstra's algorithm.
+
+From our problem statement, we believe that we will not need to utilize BFS, as this solution will not help accomplish something that our shortest path algorithm would not already solve - the existence of a path between nodes would be characterized by the existence of a cost or if the cost is infinite.
+ 
+Dijkstra’s algorithm outputs a shortest path tree, which we will then traverse to print out the different options in this format:
+Route #x 	Source Airport		Airline and Flight Duration	Airport Stop #1 (if needed)  Airline and Flight #2 Duration (if needed) 	Destination Airport 	Friction
+
+This will print out the vertex, edge, vertex for as many stops there are in the paths. To find friction, we will count how many vertices and multiply it by the duration. For example, if there are 2 stops with flight 1 1.2 hours long, flight 2 .3 hours long, and flight 3 .5 hours long, then the value at the index of the route would return (1.2 + 0.3 + 0.5) * 2 = 4 (the friction). This will just trace the edges and keep a count of vertices between source and destination to compute this.
+ 
+Most individual traversing will take O(n), and thus the overall run time would be something like O(n^2 + x*n) where x is the amount of times we traverse and n is the amount of airlines, but will be negligible as we can just generalize this to O(n^2), with the O(n^2) from Dijkstra’s algorithm. That is, unless the amount of individual flights m is greater than n^2, traversing through all of that would be larger and therefore O(m) would be the longest runtime. In terms of memory, the graph will be the only part to take up memory using the pointers between each vertex.
+
+The second algorithm that we are using will be force-directed graph drawing. This algorithm allows us to present our findings about the airports in a clear and conscientious manner and is ideally relatively simple to implement. The crux of this algorithm is defining a physical system in which each individual node responds to. Based on the properties defined by the model the nodes will repel each other accordingly until every node reaches an “equilibrium state”. The result of this algorithm is a visually pleasing that minimizes each edge overlap and a relatively symmetrical graph. A good way to visualize this algorithm is each node as a solid metal ring connected by springs. These springs are pushing and pulling each node accordingly until all the springs are in equilibrium. Once the springs are at rest, that is the resulting graph. 
+
+There are many advantages to using this graph algorithm. One of the main advantages is the simplicity of its implementation. The physical model that the graph is drawn is defined by the properties of the data, which in our case would be the airports that are connected to each other and the number of flights out of each airport. 
+
+We believe that a graph visualization algorithm will go a long way in accomplishing our end solution. Providing the user with a clear visual on how our network of airports are connected will be useful. Our goal will be to make a visual of the graph with weighted edges, allowing the nodes with the most connections to grow in size and have more overlap around them. This will allow the user to, at a glance, observe how the airport system is connected.
+
+
+## Timeline
+
+Data acquisition and Map: by Nov 10
+BFS by Nov 16
+Implement graph by Nov 24
+Djikstras by November 30
+Force-directed graph drawing  by December 4
+Finalize December 7
+ 
+
