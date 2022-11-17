@@ -8,13 +8,17 @@
 class Airport {
 
   public:
+
+    
+
     Airport();
     Airport(std::string mySource, std::string mySourceId);
 
-    std::string getSource() { return source; }
-    
-    bool operator >(Airport other) {
-      std::cout << other.getSource() << std::endl;
+
+    bool operator < (const Airport &other) {
+      if (source < other.source) {
+        return true;
+      }
       return false;
     }
 
