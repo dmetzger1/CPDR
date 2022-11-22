@@ -15,18 +15,17 @@ vector<string> data_list(){
         return data_vector; //return the empty vector if that's teh case
     }
     string line_;
-    int index = 10; //index is only used to get the first 10 datapoints for testing
-    while(getline(input, line_) && index !=0){
+    //int index = 100000; //index is only used to get the first 10 datapoints for testing
+    //while(getline(input, line_) && index != 0){
+    while(getline(input, line_)){
         data_vector.push_back(line_);   //push back each line of dataset into the vector
-        index--;
+        //index--;
     }
-    for( string x: data_vector){ //print out the vector
-        cout<<x<<endl;
-    }
+    // for( string x: data_vector){ //print out the vector
+    //     cout<<x<<endl;
+    // }
     input.close();
     return data_vector;
-
-
 }
 
 vector<Flights> data_structs(){ //define fli9ghts struct elsewhere
@@ -77,15 +76,15 @@ vector<Flights> data_structs(){ //define fli9ghts struct elsewhere
 
     for(Flights z: flight_list){
         //Flights test = flight_list[z];
-        cout<<z.airline<<endl;
-        cout<<z.airline_id<<endl;
-        cout<<z.source<<endl;
-        cout<<z.source_id<<endl;
-        cout<<z.dest<<endl;
-        cout<<z.dest_id<<endl;
+        // cout<<z.airline<<endl;
+        // cout<<z.airline_id<<endl;
+        // cout<<z.source<<endl;
+        // cout<<z.source_id<<endl;
+        // cout<<z.dest<<endl;
+        // cout<<z.dest_id<<endl;
         //cout<<z.codeshare<<endl;
-        cout<<z.num_stops<<endl;
-        cout<<" "<<endl;
+        // cout<<z.num_stops<<endl;
+        // cout<<" "<<endl;
 
     }
     return flight_list;

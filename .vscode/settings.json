@@ -66,6 +66,7 @@
     "type_traits": "cpp",
     "typeinfo": "cpp",
     "variant": "cpp",
-    "algorithm": "cpp"
+    "algorithm": "cpp",
+    "set": "cpp"
   }
 }
