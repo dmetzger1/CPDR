@@ -20,6 +20,7 @@ class Graph {
     std::map<std::string, std::map<std::string, std::vector<Edge>>> getAdjList() {
       return adj_list_;
     }
+    std::vector<std::string> shortestPath(std::string airport1, std::string airport2); //returns the path with least amount of edges between 2 vertices (DOES NOT ACCOUNT FOR STOPS OR ANY WEIGHTS)
 
   private:
     //maps the source id to a map (adjacent list) of dest id and vector of ways to get there

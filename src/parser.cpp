@@ -5,6 +5,7 @@ using namespace std;
 vector<string> data_list(){
     cout<<"inside function"<<endl;
     string filename = "data_/routes.dat.txt"; //create file 
+    //string filename = "data_/test_cases_1";  //use this for test cases
     ifstream input;
 
     input.open(filename); //open the file
@@ -22,7 +23,7 @@ vector<string> data_list(){
         //index--;
     }
     // for( string x: data_vector){ //print out the vector
-    //     cout<<x<<endl;
+    //      cout<<x<<endl;
     // }
     input.close();
     return data_vector;
@@ -73,19 +74,18 @@ vector<Flights> data_structs(){ //define fli9ghts struct elsewhere
 
         flight_list.push_back(cur_flight);
     }
-
-    for(Flights z: flight_list){
+    /* for(Flights z: flight_list){
         //Flights test = flight_list[z];
-        // cout<<z.airline<<endl;
-        // cout<<z.airline_id<<endl;
-        // cout<<z.source<<endl;
-        // cout<<z.source_id<<endl;
-        // cout<<z.dest<<endl;
-        // cout<<z.dest_id<<endl;
+        cout<<z.airline<<endl;
+        cout<<z.airline_id<<endl;
+        cout<<z.source<<endl;
+        cout<<z.source_id<<endl;
+        cout<<z.dest<<endl;
+        cout<<z.dest_id<<endl;
         //cout<<z.codeshare<<endl;
-        // cout<<z.num_stops<<endl;
-        // cout<<" "<<endl;
+        cout<<z.num_stops<<endl;
+        cout<<" "<<endl;
 
-    }
+    }*/
     return flight_list;
 }

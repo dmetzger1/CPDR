@@ -34,4 +34,19 @@ int main(int argc, char* argv[]) {
   // }
   std::cout <<"The amount of airports is " << g -> airports_.size() << std::endl;
   std::cout << "Map size is " << g -> getAdjList().size() << std::endl;
+  /*for(auto it = g->airports_.begin(); it != g->airports_.end(); ++it){
+    cout<<*it<<endl;
+  }*/
+  Graph();
+  vector<string> test;
+  std::string air1 = "THL";
+  std::string air2 = "ISP";
+  test = g->shortestPath(air1, air2);
+  cout<<"and now for the shortest path"<<endl;
+  for(unsigned long i = 0; i < test.size(); i++){
+    cout<<test[i]<<endl;
+  }
+  if(test.size() == 0){
+    cout<<"there is no path between the airports"<<endl;
+  }
 }
