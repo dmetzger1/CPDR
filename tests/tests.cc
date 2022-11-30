@@ -40,6 +40,23 @@ TEST_CASE("Testing edges are correct", "[case-1]") {
 
 //write tests cases for, shortest path, and graph
 
+TEST_CASE("Testing shortest path is correct", "[case-1]"){
+  Graph * g = new Graph("/Users/patrickcunningham/Programming/CPDR/data_/test_cases_1.txt");
+  std::vector<std::string> test1{ "BAL", "DAL", "AUS", "SF", "SD" };
+  std::vector<std::string> test2{ "DAL", "BAL", "NY" };
+  vector<string> test3;
+  REQUIRE(g->shortestPath("BAL", "SD") == test1);
+  REQUIRE(g->shortestPath("DAL", "NY") == test2);
+  REQUIRE(g->shortestPath("BAL", "LV") == test3);
+  REQUIRE(g->shortestPath("AUS", "SEA") == test3);
+
+}
+
 //graph, verify that the correct number of airports, correct number of unique arilines, the adjacency list is correct
 
+TEST_CASE("Shortest path test2", "[case-1]"){
+  Graph * g = new Graph("/Users/patrickcunningham/Programming/CPDR/data_/test_cases_1.txt");
+  REQUIRE(g->airports_.size() == 14);
+  REQUIRE(g -> getAdjList().size() == 11);
 
+}
