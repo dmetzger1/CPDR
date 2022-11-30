@@ -67,6 +67,12 @@
     "typeinfo": "cpp",
     "variant": "cpp",
     "algorithm": "cpp",
-    "set": "cpp"
+    "set": "cpp",
+    "future": "cpp",
+    "numeric": "cpp",
+    "queue": "cpp",
+    "random": "cpp",
+    "regex": "cpp",
+    "thread": "cpp"
   }
 }

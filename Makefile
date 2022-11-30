@@ -7,7 +7,7 @@ tests: bin/tests
 bin/exec: ./src/main.cpp ./src/functions.cpp ./src/parser.cpp ./src/graph.cpp
 	$(CXX) $(CXX_FLAGS) $^ -o $@
 
-bin/tests: ./tests/tests.cc ./src/functions.cpp
+bin/tests: ./tests/tests.cc ./src/functions.cpp ./src/parser.cpp ./src/graph.cpp
 	$(CXX) $(CXX_FLAGS) $^ -o $@
 
 .DEFAULT_GOAL := exec
