@@ -17,7 +17,7 @@ int main(int argc, char* argv[]) {
   // data_list(); 
   // data_structs(); //prints out the first few dataset line and then prints them out as a struct as well
 
-  Graph * g = new Graph();
+  Graph * g = new Graph("/Users/patrickcunningham/Programming/CPDR/data_/routes.dat.txt");
   auto testList = g -> getAdjList();
   // auto testMap = testList.at("4029");
   // std::cout << "Lets look at 4029's adjacency list" << std::endl;
@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
   /*for(auto it = g->airports_.begin(); it != g->airports_.end(); ++it){
     cout<<*it<<endl;
   }*/
-  Graph();
+  Graph("/Users/patrickcunningham/Programming/CPDR/data_/routes.dat.txt");
   vector<string> test;
   std::string air1 = "THL";
   std::string air2 = "ISP";

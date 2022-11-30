@@ -19,6 +19,6 @@ struct Flights{ //
     //int num_stops;
 };
 
-vector<string> data_list(); //creates vector of each line in the flights dataset
-vector<Flights> data_structs();  //craetes vector of structs made from each node in the dataset
+vector<string> data_list(string filename); //creates vector of each line in the flights dataset
+vector<Flights> data_structs(string filename);  //craetes vector of structs made from each node in the dataset
 

@@ -13,7 +13,7 @@
 class Graph {
 
   public:
-    Graph();
+    Graph(string filename);
 
     //std::vector<std::string> airports_;
     std::set<std::string> airports_;

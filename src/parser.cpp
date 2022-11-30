@@ -2,9 +2,8 @@
 #include "parser.h"
 using namespace std;
 
-vector<string> data_list(){
+vector<string> data_list(string filename){
     cout<<"inside function"<<endl;
-    string filename = "data_/routes.dat.txt"; //create file 
     //string filename = "data_/test_cases_1";  //use this for test cases
     ifstream input;
 
@@ -29,9 +28,8 @@ vector<string> data_list(){
     return data_vector;
 }
 
-vector<Flights> data_structs(){ //define fli9ghts struct elsewhere
-
-    vector<string> data_vector = data_list(); //makes the vector of the dataset nodes in string form
+vector<Flights> data_structs(string filename){ //define fli9ghts struct elsewhere
+    vector<string> data_vector = data_list(filename); //makes the vector of the dataset nodes in string form
     //break down into structs
     vector<Flights> flight_list;
 

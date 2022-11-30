@@ -10,8 +10,8 @@
 #include <queue>
 
 using namespace std;
-Graph::Graph() {
-  std::vector<Flights> flight_list = data_structs(); //calls the csv parser to get list of flightts
+Graph::Graph(string filename) {
+  std::vector<Flights> flight_list = data_structs(filename); //calls the csv parser to get list of flightts
   for (unsigned i = 0; i < flight_list.size(); i++) {
 
     //create source and destination airport and edge connecting the two
