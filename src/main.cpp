@@ -3,6 +3,7 @@
 #include "functions.hpp"
 #include "parser.h"
 #include "graph.h"
+#include <algorithm>
 
 #include "edge.h"
 
@@ -37,4 +38,5 @@ int main(int argc, char* argv[]) {
 
   g->getCoords("/Users/patrickcunningham/Programming/CPDR/data_/airports.dat.txt");
   std::cout << g->coords.size() << std::endl;
+  
 }

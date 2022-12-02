@@ -73,6 +73,7 @@
     "queue": "cpp",
     "random": "cpp",
     "regex": "cpp",
-    "thread": "cpp"
+    "thread": "cpp",
+    "filesystem": "cpp"
   }
 }

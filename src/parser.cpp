@@ -2,6 +2,165 @@
 #include "parser.h"
 using namespace std;
 
+std::vector<string> filter = {
+    "ACU",
+    "AGM",
+    "AOQ",
+    "AOS",
+    "ATT",
+    "BCV",
+    "BFQ",
+    "BLD",
+    "BNY",
+    "BVV",
+    "CBS",
+    "CGA",
+    "CKD",
+    "CKX",
+    "CUK",
+    "CXF",
+    "CZH",
+    "DGA",
+    "DHB",
+    "DIW",
+    "EAR",
+    "EDA",
+    "ELL",
+    "EXI",
+    "FBS",
+    "FDE",
+    "FSZ",
+    "FVM",
+    "GCW",
+    "GHE",
+    "GLN",
+    "GNU",
+    "GRV",
+    "GSM",
+    "HKB",
+    "HYL",
+    "IGM",
+    "IKE",
+    "INB",
+    "INC",
+    "IOQ",
+    "IOT",
+    "IUI",
+    "JJA",
+    "JUK",
+    "JUU",
+    "KAE",
+    "KBC",
+    "KBU",
+    "KCC",
+    "KCG",
+    "KCL",
+    "KCQ",
+    "KGQ",
+    "KGX",
+    "KHQ",
+    "KKB",
+    "KKI",
+    "KLL",
+    "KOZ",
+    "KPB",
+    "KTB",
+    "KUS",
+    "KUZ",
+    "KWF",
+    "KXU",
+    "LBP",
+    "LCR",
+    "LGQ",
+    "LKE",
+    "LMC",
+    "LNV",
+    "LSA",
+    "MCM",
+    "MJU",
+    "MLH",
+    "MNT",
+    "MPP",
+    "MRA",
+    "NIQ",
+    "NKI",
+    "NSQ",
+    "NTG",
+    "NUP",
+    "OGM",
+    "OHH",
+    "OLH",
+    "ORI",
+    "ORZ",
+    "OTD",
+    "PAF",
+    "PEC",
+    "PHO",
+    "PLJ",
+    "PND",
+    "PPV",
+    "PQS",
+    "PUM",
+    "PVE",
+    "PYC",
+    "QFN",
+    "QJH",
+    "QOQ",
+    "QUB",
+    "QUV",
+    "QUW",
+    "RCE",
+    "RDV",
+    "RIG",
+    "RKA",
+    "RMP",
+    "SAE",
+    "SAX",
+    "SGG",
+    "SHC",
+    "SIC",
+    "SLI",
+    "SQS",
+    "SRK",
+    "SRV",
+    "SSB",
+    "SVC",
+    "SVK",
+    "SVR",
+    "SVS",
+    "SXP",
+    "SYB",
+    "SZE",
+    "SZI",
+    "TAL",
+    "TCD",
+    "TCR",
+    "TCT",
+    "TFI",
+    "TGC",
+    "THD",
+    "TKE",
+    "TLT",
+    "TNK",
+    "TNO",
+    "TQA",
+    "TQI",
+    "TVS",
+    "TZA",
+    "UGB",
+    "UPK",
+    "WBB",
+    "WNH",
+    "WSX",
+    "WTL",
+    "WWP",
+    "WWT",
+    "XEQ",
+    "YKT",
+    "ZBL",
+    "ZDY",
+    "ZEL"};
+
 vector<string> data_list(string filename){
     cout<<"inside function"<<endl;
     //string filename = "data_/test_cases_1";  //use this for test cases
@@ -21,9 +180,7 @@ vector<string> data_list(string filename){
         data_vector.push_back(line_);   //push back each line of dataset into the vector
         //index--;
     }
-    // for( string x: data_vector){ //print out the vector
-    //      cout<<x<<endl;
-    // }
+    
     input.close();
     return data_vector;
 }
@@ -36,7 +193,6 @@ vector<Flights> data_structs(string filename){ //define fli9ghts struct elsewher
     for(string x: data_vector){
         string cur_set = x;
         stringstream set_stream(cur_set);
-
 
         string _airline;
         getline(set_stream, _airline, ','); //seperate the different strings of data value from each line of the dataset
@@ -54,10 +210,6 @@ vector<Flights> data_structs(string filename){ //define fli9ghts struct elsewher
         getline(set_stream, _codeshare, ',');
         string _num_stops;
         getline(set_stream, _num_stops, ',');
-        //string _test;
-        //(set_stream, _test, ',');
-        //int _num_stops = (int) _test;
-
 
         Flights cur_flight = { //create struct from the seperted strings
             _airline,
@@ -69,22 +221,10 @@ vector<Flights> data_structs(string filename){ //define fli9ghts struct elsewher
             //_codeshare, pointless unless we need it somehow
             _num_stops
         };
-
-        flight_list.push_back(cur_flight);
+        if (std::find(filter.begin(), filter.end(), _source) == filter.end() && std::find(filter.begin(), filter.end(), _dest) == filter.end()) {
+            flight_list.push_back(cur_flight);
+        }  
     }
-    /* for(Flights z: flight_list){
-        //Flights test = flight_list[z];
-        cout<<z.airline<<endl;
-        cout<<z.airline_id<<endl;
-        cout<<z.source<<endl;
-        cout<<z.source_id<<endl;
-        cout<<z.dest<<endl;
-        cout<<z.dest_id<<endl;
-        //cout<<z.codeshare<<endl;
-        cout<<z.num_stops<<endl;
-        cout<<" "<<endl;
-
-    }*/
     return flight_list;
 }
 

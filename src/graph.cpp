@@ -8,6 +8,8 @@
 #include <map>
 #include <string>
 #include <queue>
+#include <math.h>
+#include <cmath>
 
 using namespace std;
 Graph::Graph(string filename) {
@@ -32,6 +34,23 @@ Graph::Graph(string filename) {
     }
     adj_list_[source][dest].push_back(toInsert);
   }
+}
+
+double Graph::cost(string lat1s, string lon1s, string lat2s, string lon2s) {
+  double radius = 6371; // radius of earth in KM
+  double lat1 = stod(lat1s);
+  double lon1 = stod(lon1s);
+  double lat2 = stod(lat2s);
+  double lon2 = stod(lon2s);
+  double deg_lat = lat2 - lat1;
+  double deg_lon = lon2 - lon1;
+  double rad_lat = deg_lat * (M_PI/180); // does pi work
+  double rad_lon = deg_lon * (M_PI/180);
+  
+  double a = sin(rad_lat/2) * sin(rad_lat/2) + cos(lat1 * (M_PI/180)) * cos(lat2 * (M_PI/180)) * sin(rad_lon/2) * sin(rad_lon/2);
+  double c = 2 * atan2(sqrt(a), sqrt(1 - a));
+  double d = radius * c;
+  return d;
 }
 
 void Graph::getCoords(string filename) {
