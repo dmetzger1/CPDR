@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <utility>
 #include <map>
 #include <string>
 #include <algorithm>
@@ -15,9 +16,13 @@ class Graph {
   public:
     Graph(string filename);
 
-    //std::vector<std::string> airports_;
     std::set<std::string> airports_;
-    std::map<std::string, std::map<std::string, std::vector<Edge>>> getAdjList() {
+    std::map<std::string, std::pair<std::string, std::string>> coords;
+
+    void getCoords(string filename);
+    
+    std::map<std::string, std::map<std::string, std::vector<Edge>>> getAdjList()
+    {
       return adj_list_;
     }
     std::vector<std::string> shortestPath(std::string airport1, std::string airport2); //returns the path with least amount of edges between 2 vertices (DOES NOT ACCOUNT FOR STOPS OR ANY WEIGHTS)

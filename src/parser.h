@@ -19,6 +19,13 @@ struct Flights{ //
     //int num_stops;
 };
 
+struct Airports{ //
+    string IATA;
+    string ICAO;
+    string latitude;
+    string longitude;
+};
+
 vector<string> data_list(string filename); //creates vector of each line in the flights dataset
 vector<Flights> data_structs(string filename);  //craetes vector of structs made from each node in the dataset
-
+vector<Airports> aiports_data_structs(string filename);

@@ -87,3 +87,42 @@ vector<Flights> data_structs(string filename){ //define fli9ghts struct elsewher
     }*/
     return flight_list;
 }
+
+
+vector<Airports> aiports_data_structs(string filename) { //define fli9ghts struct elsewhere
+    vector<string> data_vector = data_list(filename); //makes the vector of the dataset nodes in string form
+    vector<Airports> airport_list;
+
+    for(string x: data_vector){
+        string cur_set = x;
+        stringstream set_stream(cur_set);
+
+        string number;
+        getline(set_stream, number, ','); //seperate the different strings of data value from each line of the dataset
+        string name;
+        getline(set_stream, name, ',');
+        string city;
+        getline(set_stream, city, ',');
+        string country;
+        getline(set_stream, country, ',');
+        string IATA;
+        getline(set_stream, IATA, ','); //seperate the different strings of data value from each line of the dataset
+        string ICAO;
+        getline(set_stream, ICAO, ',');
+        string latitude;
+        getline(set_stream, latitude, ',');
+        string longitude;
+        getline(set_stream, longitude, ',');
+
+        Airports cur_aiport = { //create struct from the seperted strings
+            IATA.substr(1, IATA.size()-2),
+            ICAO.substr(1, ICAO.size()-2),
+            latitude,
+            longitude
+        };
+
+        airport_list.push_back(cur_aiport);
+    }
+
+    return airport_list;
+}

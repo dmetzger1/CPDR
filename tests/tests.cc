@@ -58,5 +58,4 @@ TEST_CASE("Shortest path test2", "[case-1]"){
   Graph * g = new Graph("/Users/patrickcunningham/Programming/CPDR/data_/test_cases_1.txt");
   REQUIRE(g->airports_.size() == 14);
   REQUIRE(g -> getAdjList().size() == 11);
-
 }

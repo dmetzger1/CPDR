@@ -33,6 +33,27 @@ Graph::Graph(string filename) {
     adj_list_[source][dest].push_back(toInsert);
   }
 }
+
+void Graph::getCoords(string filename) {
+  std::vector<Airports> airport_list = aiports_data_structs(filename);
+  for (unsigned i = 0; i < airport_list.size(); i++) {
+    std::string airport_IATO = airport_list[i].IATA;
+    std::string airport_ICAO = airport_list[i].ICAO;
+    if (airports_.count(airport_IATO) || airports_.count(airport_ICAO)) {
+
+      std::string airport_id = "";
+      if (airports_.count(airport_IATO)) {
+        airport_id = airport_IATO;
+      } else {
+        airport_id = airport_ICAO;
+      }
+
+      pair<string, string> toInsert = make_pair(airport_list[i].latitude, airport_list[i].longitude);
+      coords.insert({airport_id, toInsert});
+    }
+  }
+}
+
 std::vector<std::string> Graph::shortestPath(std::string airport1, std::string airport2) {
   cout<<"inside shortest path"<<endl;
   std::vector<std::string> to_return; 
