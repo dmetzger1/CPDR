@@ -132,20 +132,6 @@ std::vector<std::string> Graph::shortestPath(std::string airport1, std::string a
   return to_return;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 double Graph::dijkstras(string source, string dest, string filename) {
 
   cout<<"inside of dijkstras"<<endl;
@@ -165,8 +151,6 @@ double Graph::dijkstras(string source, string dest, string filename) {
 
   priority_queue<pair<double, string>, vector<pair<double, string>>, greater<pair<double,string>>> unvisited;
   unvisited.emplace(0, source);
-
-  //what if we jsut map all the distances to their ids???
 
   getCoords(filename); // initializes coords
 
@@ -216,6 +200,44 @@ double Graph::dijkstras(string source, string dest, string filename) {
   return distances[dest];
 }
 
-//randomly generate graphs, randomly select two points on the graph
-//check for valid path
-//create my csv file that opnly has like 10 cities amnd flights
+bool Graph::DLS(std::string src, std::string target, int limit) {
+  if (src == target) {
+    return true;
+  }
+   
+  if (limit <= 0) {
+    return false;
+  }
+  
+  std::map<std::string, std::vector<Edge>> inner_list = adj_list_[src];
+  for (auto i : inner_list) {
+    std::string loc = i.first;
+    if (DLS(loc, target, limit-1) == true) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Graph::DFS(std::string src, std::string target) {
+  if (src == target) {
+    return true;
+  }
+  std::map<std::string, std::vector<Edge>> inner_list = adj_list_[src];
+  for (auto i : inner_list) {
+    std::string loc = i.first;
+    if (DFS(loc, target)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+bool Graph::IDDFS(std::string src, std::string target, int max_depth)
+{
+    for (int i = 0; i <= max_depth; i++)
+    if (DLS(src, target, i) == true)
+          return true;
+   
+    return false;
+}
