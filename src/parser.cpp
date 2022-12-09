@@ -159,7 +159,10 @@ std::vector<string> filter = {
     "YKT",
     "ZBL",
     "ZDY",
-    "ZEL"};
+    "ZEL",
+    "BSS",
+    "MTE",
+    "QFX"};
 
 vector<string> data_list(string filename){
     cout<<"inside function"<<endl;

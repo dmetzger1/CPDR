@@ -20,6 +20,8 @@ int main(int argc, char* argv[]) {
 
   Graph * g = new Graph("/Users/patrickcunningham/Programming/CPDR/data_/routes.dat.txt");
   auto testList = g -> getAdjList();
+
+  // cout<< "The adjancency list of AUX is "<< testList["AUX"].size()<<endl;
   // auto testMap = testList.at("4029");
   // std::cout << "Lets look at 4029's adjacency list" << std::endl;
   // for (auto i = testMap.begin(); i != testMap.end(); i++) {
@@ -33,10 +35,33 @@ int main(int argc, char* argv[]) {
   //     std::cout << "NEXT FLIGHT" << std::endl;
   //   }
   // }
-  std::cout <<"The amount of airports is " << g -> airports_.size() << std::endl;
-  std::cout << "Map size is " << g -> getAdjList().size() << std::endl;
+  // std::cout <<"The amount of airports is " << g -> airports_.size() << std::endl;
+  // std::cout << "Map size is " << g -> getAdjList().size() << std::endl;
+
+  // std::vector<std::string> testBFS = g->shortestPath("ZAM", "EFL");
+  // for(unsigned i = 0; i < testBFS.size(); i++){
+  //   cout<<testBFS[i]<<endl;
+  // }
+
 
   g->getCoords("/Users/patrickcunningham/Programming/CPDR/data_/airports.dat.txt");
-  std::cout << g->coords.size() << std::endl;
+  std::cout << g->coords.size() << " these are the coord size"<<std::endl;
+  std::cout << g->airports_.size() << " these are the list size"<<std::endl;
+
+  string lat1s = g->coords["AUX"].first;
+  string lon1s = g->coords["AUX"].second;
+  string lat2s = g->coords["MAB"].first;
+  string lon2s = g->coords["MAB"].second;
+
+  std::cout << g->coords["BVS"].first << std::endl;
+
+  double c = g->cost(lat1s, lon1s, lat2s, lon2s);
+
+
+  cout << "cost " << c << endl;
+
+
+  double distance_ = g->dijkstras("AUX", "MAB", "/Users/patrickcunningham/Programming/CPDR/data_/airports.dat.txt");
+  cout<<"the shortest distance between the airports is "<<distance_<<endl;
   
 }

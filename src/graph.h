@@ -21,8 +21,10 @@ class Graph {
     void getCoords(string filename);
     double cost(string lat1s, string lon1s, string lat2s, string lon2s);
     std::vector<std::string> shortestPath(std::string airport1, std::string airport2); //returns the path with least amount of edges between 2 vertices (DOES NOT ACCOUNT FOR STOPS OR ANY WEIGHTS)
+    double dijkstras(string source, string dest, string filename);
     
     std::map<std::string, std::pair<std::string, std::string>> coords;
+    
     std::set<std::string> airports_;
   private:
     //maps the source id to a map (adjacent list) of dest id and vector of ways to get there
