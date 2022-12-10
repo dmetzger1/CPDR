@@ -165,7 +165,7 @@ std::vector<string> filter = {
     "QFX"};
 
 vector<string> data_list(string filename){
-    cout<<"inside function"<<endl;
+    
     //string filename = "data_/test_cases_1";  //use this for test cases
     ifstream input;
 

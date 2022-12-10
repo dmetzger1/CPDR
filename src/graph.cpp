@@ -20,6 +20,7 @@ Graph::Graph(string filename) {
     std::string source = flight_list[i].source;
     std::string dest = flight_list[i].dest;
 
+    //creates the edge from the source to the destination, along with the number of stops between the two flights.
     Edge toInsert(source, dest, flight_list[i].airline, flight_list[i].num_stops);
 
     // if we've seen the source before, just add to adjacency list, else create new map entry
@@ -27,6 +28,7 @@ Graph::Graph(string filename) {
 
     std::set<std::string>::iterator it2 = airports_.find(dest);    
 
+    //if we've never sen the source or the destination before, we need to add this aiprot to the aiports_ list
     if (it2 == airports_.end()) {
       airports_.insert(dest);
     }
@@ -39,15 +41,14 @@ Graph::Graph(string filename) {
       tempMap.insert({dest, edges});
       adj_list_.insert({source, tempMap});
     }
+    //inserts edge into adjacency list
     adj_list_[source][dest].push_back(toInsert);
   }
 }
 
 double Graph::cost(string lat1s, string lon1s, string lat2s, string lon2s) {
   double radius = 6371; // radius of earth in KM
-  std::cout << lat1s << " " << lon1s << " " << lat2s << "  " << lon2s << std::endl;
 
-  std::cout << lat2s << std::endl;
 
   double lat1 = stod(lat1s);
   double lon1 = stod(lon1s);
@@ -65,12 +66,16 @@ double Graph::cost(string lat1s, string lon1s, string lat2s, string lon2s) {
   return d;
 }
 
+
+
 void Graph::getCoords(string filename) {
+  //gets structs from the distances data file
   std::vector<Airports> airport_list = aiports_data_structs(filename);
   for (unsigned i = 0; i < airport_list.size(); i++) {
     std::string airport_IATO = airport_list[i].IATA;
     std::string airport_ICAO = airport_list[i].ICAO;
 
+    //checks which version of the aiport ID we have in our airports list
     if (airports_.count(airport_IATO) || airports_.count(airport_ICAO)) {
       
       std::string airport_id = "";
@@ -80,6 +85,7 @@ void Graph::getCoords(string filename) {
         airport_id = airport_ICAO;
       }
 
+      //makes pair of the latitude and latitiude of the specific airport
       pair<string, string> toInsert = make_pair(airport_list[i].latitude, airport_list[i].longitude);
       coords.insert({airport_id, toInsert});
     }
@@ -87,7 +93,7 @@ void Graph::getCoords(string filename) {
 }
 
 std::vector<std::string> Graph::BFS(std::string airport1, std::string airport2) {
-  cout<<"inside shortest path"<<endl;
+  
   std::vector<std::string> to_return; 
   if (airports_.find(airport1) == airports_.end() || airports_.find(airport2) == airports_.end()) { // checks if airports are in list of airports
     return to_return;
@@ -134,115 +140,111 @@ std::vector<std::string> Graph::BFS(std::string airport1, std::string airport2) 
 
 double Graph::dijkstras(string source, string dest, string filename) {
 
-  cout<<"inside of dijkstras"<<endl;
 
+  //creates our maps that maintain distances and visited
   map<string, double> distances;
   map<string, bool> visited;
-  //vector<vector<string>> previous(adj_list_.size() -1);
-  //previous.push_back();
+
   map<string, string> previous;
 
-
-
+  //other than source, all distances need to be the max value (infinity)
   for (string airport : airports_) {
     distances[airport] = INFINITY;
   }
 
   distances[source] = 0;
 
+  //other than source, mark all other nodes as unvisited
   for (string airport : airports_) {
     visited[airport] = false;
     previous[airport] = "none";
   }
 
+  //initializing our priority que based on the calculated distances
   priority_queue<pair<double, string>, vector<pair<double, string>>, greater<pair<double,string>>> unvisited;
   unvisited.emplace(0, source);
-
-  //what if we jsut map all the distances to their ids???
 
   getCoords(filename); // initializes coords
 
   while (!unvisited.empty()) {
-    //cout<<"inside of while loop"<<endl;
     auto top = unvisited.top();
     unvisited.pop();
 
-    string node = top.second;
     double distance = top.first;
+    string node = top.second;
+    
 
     if (visited[node]) {
       continue;
     }
+
     visited[node] = true;
     for (const auto& neighbor : adj_list_[node]) {
 
-      //cout<<"inside of for loop"<<endl;
-
+      //gather coords for neighbor
       string neighbor_node = neighbor.first;
       string lat1s = coords[node].first;
       string lon1s = coords[node].second;
       string lat2s = coords[neighbor_node].first;
       string lon2s = coords[neighbor_node].second;
 
-
-      //std::cout << node << std::endl;
-      //std::cout << neighbor_node << std::endl;
+      //calculate distance between current node and neighbor node
       double neighbor_distance = cost(lat1s, lon1s, lat2s, lon2s);
-      //std::cout << "BOYYYY" << std::endl;
       double potential_distance = neighbor_distance + distance;
 
+      // if potential distance is smaller than neighbor distance update distance map
       if (potential_distance < distances[neighbor_node])
       {
         distances[neighbor_node] = potential_distance;
         previous[neighbor_node] = node;
 
-        cout<<distances[neighbor_node]<<endl;
+       
         
         unvisited.emplace(distances[neighbor_node], neighbor_node);
-        if (neighbor_node == dest) {
-          cout<<"made it to dest!!!"<<endl;
-        }
+        
       }
     }
   }
+
+  //initializing shortest path
   vector<string> path;
   string cur = dest;
   path.push_back(cur);
+  //iterate through previous to create path
   while(cur != source){
 
     path.push_back(previous[cur]);
     cur = previous[cur];
   }
-  //path.push_back(cur);
   reverse(path.begin(), path.end());
 
-  cout<<"the shortest length path is "<< endl;
+  cout<<"The shortest length path from Dijkstra's algorithm is "<< endl;
   for(string node : path){
     cout<<node<<endl;
   }
-  cout<<"that is the end of the path"<<endl;
 
-  cout << "the shortest distance is " << distances[dest] << endl;
   return distances[dest];
 }
 
 //randomly generate graphs, randomly select two points on the graph
 //check for valid path
 //create my csv file that opnly has like 10 cities amnd flights
-
-
 bool Graph::DLS(std::string src, std::string target, int limit) {
   if (src == target) {
     return true;
   }
 
+  //if we have reached our depth limit and the current element is not what we want, return
   if (limit <= 0) {
     return false;
   }
   
   std::map<std::string, std::vector<Edge>> inner_list = adj_list_[src];
+
+  //goes through neighbors of src
   for (auto i : inner_list) {
     std::string loc = i.first;
+
     if (DLS(loc, target, limit-1) == true) {
       return true;
     }
@@ -250,13 +252,15 @@ bool Graph::DLS(std::string src, std::string target, int limit) {
   return false;
 }
 
+
 bool Graph::DFS(std::string src, std::string target, std::set<string>& visited) {
   if (src == target) {
     return true;
   }
-  visited.insert(src);
+  visited.insert(src); //inserts src into seen set
   std::map<std::string, std::vector<Edge>> inner_list = adj_list_[src];
 
+  //goes throught the neighbors of source
   for (auto i : inner_list) {
     std::string loc = i.first;
     if (visited.count(loc) == false && DFS(loc, target, visited)) {
