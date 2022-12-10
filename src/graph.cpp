@@ -139,8 +139,9 @@ std::vector<std::string> Graph::BFS(std::string airport1, std::string airport2) 
 }
 
 double Graph::dijkstras(string source, string dest, string filename) {
-
-
+  if (airports_.find(source) == airports_.end() || airports_.find(dest) == airports_.end()) { // checks if airports are in list of airports
+    return -1;
+  }
   //creates our maps that maintain distances and visited
   map<string, double> distances;
   map<string, bool> visited;
@@ -230,6 +231,9 @@ double Graph::dijkstras(string source, string dest, string filename) {
 //check for valid path
 //create my csv file that opnly has like 10 cities amnd flights
 bool Graph::DLS(std::string src, std::string target, int limit) {
+  if (airports_.find(src) == airports_.end() || airports_.find(target) == airports_.end()) { // checks if airports are in list of airports
+    return false;
+  }
   if (src == target) {
     return true;
   }
@@ -254,6 +258,9 @@ bool Graph::DLS(std::string src, std::string target, int limit) {
 
 
 bool Graph::DFS(std::string src, std::string target, std::set<string>& visited) {
+  if (airports_.find(src) == airports_.end() || airports_.find(target) == airports_.end()) { // checks if airports are in list of airports
+    return false;
+  }
   if (src == target) {
     return true;
   }
@@ -273,9 +280,13 @@ bool Graph::DFS(std::string src, std::string target, std::set<string>& visited) 
 
 bool Graph::IDDFS(std::string src, std::string target, int max_depth)
 {
-    for (int i = 0; i <= max_depth; i++)
-    if (DLS(src, target, i) == true)
-          return true;
-
+  if (airports_.find(src) == airports_.end() || airports_.find(target) == airports_.end()) { // checks if airports are in list of airports
     return false;
+  }
+  for (int i = 0; i <= max_depth; i++) {
+    if (DLS(src, target, i) == true) {
+      return true;
+    }     
+  }
+  return false;
 }

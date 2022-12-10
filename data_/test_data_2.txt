@@ -15,3 +15,4 @@
 401,"Test_15","Phoenix","USA","PHO",\N,34,-112,84,0,"A","America","airport","OurAirports"
 401,"Test_16","Charlotte","USA","CLT",\N,35,-81,84,0,"A","America","airport","OurAirports"
 401,"Test_17","Tampa Bay","USA","TMP",\N,28,-82,84,0,"A","America","airport","OurAirports"
+401,"Test_19","Buffalo","USA","BUF",\N,43,-79,84,0,"A","America","airport","OurAirports"
