@@ -86,7 +86,7 @@ void Graph::getCoords(string filename) {
   }
 }
 
-std::vector<std::string> Graph::shortestPath(std::string airport1, std::string airport2) {
+std::vector<std::string> Graph::BFS(std::string airport1, std::string airport2) {
   cout<<"inside shortest path"<<endl;
   std::vector<std::string> to_return; 
   if (airports_.find(airport1) == airports_.end() || airports_.find(airport2) == airports_.end()) { // checks if airports are in list of airports
@@ -250,14 +250,17 @@ bool Graph::DLS(std::string src, std::string target, int limit) {
   return false;
 }
 
-bool Graph::DFS(std::string src, std::string target) {
+bool Graph::DFS(std::string src, std::string target, std::set<string>& visited) {
   if (src == target) {
     return true;
   }
+  visited.insert(src);
   std::map<std::string, std::vector<Edge>> inner_list = adj_list_[src];
+
   for (auto i : inner_list) {
     std::string loc = i.first;
-    if (DFS(loc, target)) {
+    if (visited.count(loc) == false && DFS(loc, target, visited)) {
+      visited.insert(loc);
       return true;
     }
   }
@@ -269,6 +272,6 @@ bool Graph::IDDFS(std::string src, std::string target, int max_depth)
     for (int i = 0; i <= max_depth; i++)
     if (DLS(src, target, i) == true)
           return true;
-   
+
     return false;
 }

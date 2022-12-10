@@ -45,10 +45,10 @@ TEST_CASE("Testing shortest path is correct", "[case-1]"){
   std::vector<std::string> test1{ "BAL", "DAL", "AUS", "SF", "SD" };
   std::vector<std::string> test2{ "DAL", "BAL", "NY" };
   vector<string> test3;
-  REQUIRE(g->shortestPath("BAL", "SD") == test1);
-  REQUIRE(g->shortestPath("DAL", "NY") == test2);
-  REQUIRE(g->shortestPath("BAL", "LV") == test3);
-  REQUIRE(g->shortestPath("AUS", "SEA") == test3);
+  REQUIRE(g->BFS("BAL", "SD") == test1);
+  REQUIRE(g->BFS("DAL", "NY") == test2);
+  REQUIRE(g->BFS("BAL", "LV") == test3);
+  REQUIRE(g->BFS("AUS", "SEA") == test3);
 
 }
 
@@ -58,4 +58,29 @@ TEST_CASE("Shortest path test2", "[case-1]"){
   Graph * g = new Graph("/Users/patrickcunningham/Programming/CPDR/data_/test_cases_1.txt");
   REQUIRE(g->airports_.size() == 14);
   REQUIRE(g -> getAdjList().size() == 11);
+}
+
+TEST_CASE("Testing IDS", "[case-1]"){
+  Graph * g = new Graph("/Users/patrickcunningham/Programming/CPDR/data_/test_cases_1.txt");
+  REQUIRE(g->IDDFS("BAL", "SF", 10) == true); // distance from BAL to SF is at most ten steps away
+  REQUIRE(g->IDDFS("BAL", "SF", 1) == false); //distance from BAL to SF is greater than one
+  REQUIRE(g->IDDFS("BAL", "SEA", 1) == true);
+
+
+  Graph * g2 = new Graph("/Users/patrickcunningham/Programming/CPDR/data_/routes.dat.txt");
+
+  std::set<string> visited;
+
+  const clock_t begin_time = clock();
+  REQUIRE(g2->DFS("JER", "GCI", visited) == true);
+  float dfs_time = float(clock() - begin_time) * 10000 / CLOCKS_PER_SEC;
+
+  const clock_t begin_time2 = clock();
+  REQUIRE(g2->IDDFS("JER", "GCI", 30) == true);
+  float iddfs_time = float(clock() - begin_time2) * 10000 / CLOCKS_PER_SEC;
+
+  std::cout << "IT TOOK DFS " << dfs_time << " SECONDS TO FIND THE SOURCE AND ONLY TOOK IDFS " << iddfs_time << " SECONDS TO FIND THE SOURCE" << std::endl;
+
+  REQUIRE(dfs_time > iddfs_time); //shows that IDFS is much faster than DFS when the data set is large
+
 }

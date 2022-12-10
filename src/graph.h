@@ -20,10 +20,10 @@ class Graph {
 
     void getCoords(string filename);
     double cost(string lat1s, string lon1s, string lat2s, string lon2s);
-    std::vector<std::string> shortestPath(std::string airport1, std::string airport2); //returns the path with least amount of edges between 2 vertices (DOES NOT ACCOUNT FOR STOPS OR ANY WEIGHTS)
+    std::vector<std::string> BFS(std::string airport1, std::string airport2); //returns the path with least amount of edges between 2 vertices (DOES NOT ACCOUNT FOR STOPS OR ANY WEIGHTS)
     double dijkstras(string source, string dest, string filename);
     bool IDDFS(std::string src, std::string target, int max_depth);
-    bool DFS(std::string src, std::string target);
+    bool DFS(std::string src, std::string target, std::set<string>& visited);
     bool DLS(std::string src, std::string target, int limit);
 
     std::map<std::string, std::pair<std::string, std::string>> coords;
