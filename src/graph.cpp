@@ -138,6 +138,11 @@ double Graph::dijkstras(string source, string dest, string filename) {
 
   map<string, double> distances;
   map<string, bool> visited;
+  //vector<vector<string>> previous(adj_list_.size() -1);
+  //previous.push_back();
+  map<string, string> previous;
+
+
 
   for (string airport : airports_) {
     distances[airport] = INFINITY;
@@ -147,15 +152,18 @@ double Graph::dijkstras(string source, string dest, string filename) {
 
   for (string airport : airports_) {
     visited[airport] = false;
+    previous[airport] = "none";
   }
 
   priority_queue<pair<double, string>, vector<pair<double, string>>, greater<pair<double,string>>> unvisited;
   unvisited.emplace(0, source);
 
+  //what if we jsut map all the distances to their ids???
+
   getCoords(filename); // initializes coords
 
   while (!unvisited.empty()) {
-    cout<<"inside of while loop"<<endl;
+    //cout<<"inside of while loop"<<endl;
     auto top = unvisited.top();
     unvisited.pop();
 
@@ -168,7 +176,7 @@ double Graph::dijkstras(string source, string dest, string filename) {
     visited[node] = true;
     for (const auto& neighbor : adj_list_[node]) {
 
-      cout<<"inside of for loop"<<endl;
+      //cout<<"inside of for loop"<<endl;
 
       string neighbor_node = neighbor.first;
       string lat1s = coords[node].first;
@@ -177,15 +185,16 @@ double Graph::dijkstras(string source, string dest, string filename) {
       string lon2s = coords[neighbor_node].second;
 
 
-      std::cout << node << std::endl;
-      std::cout << neighbor_node << std::endl;
+      //std::cout << node << std::endl;
+      //std::cout << neighbor_node << std::endl;
       double neighbor_distance = cost(lat1s, lon1s, lat2s, lon2s);
-      std::cout << "BOYYYY" << std::endl;
+      //std::cout << "BOYYYY" << std::endl;
       double potential_distance = neighbor_distance + distance;
 
       if (potential_distance < distances[neighbor_node])
       {
         distances[neighbor_node] = potential_distance;
+        previous[neighbor_node] = node;
 
         cout<<distances[neighbor_node]<<endl;
         
@@ -196,15 +205,37 @@ double Graph::dijkstras(string source, string dest, string filename) {
       }
     }
   }
-  cout << "the shortest distance is" << distances[dest] << endl;
+  vector<string> path;
+  string cur = dest;
+  path.push_back(cur);
+  while(cur != source){
+
+    path.push_back(previous[cur]);
+    cur = previous[cur];
+  }
+  //path.push_back(cur);
+  reverse(path.begin(), path.end());
+
+  cout<<"the shortest length path is "<< endl;
+  for(string node : path){
+    cout<<node<<endl;
+  }
+  cout<<"that is the end of the path"<<endl;
+
+  cout << "the shortest distance is " << distances[dest] << endl;
   return distances[dest];
 }
+
+//randomly generate graphs, randomly select two points on the graph
+//check for valid path
+//create my csv file that opnly has like 10 cities amnd flights
+
 
 bool Graph::DLS(std::string src, std::string target, int limit) {
   if (src == target) {
     return true;
   }
-   
+
   if (limit <= 0) {
     return false;
   }

@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
   // data_list(); 
   // data_structs(); //prints out the first few dataset line and then prints them out as a struct as well
 
-  Graph * g = new Graph("/Users/patrickcunningham/Programming/CPDR/data_/routes.dat.txt");
+  Graph * g = new Graph("data_/routes.dat.txt");
   auto testList = g -> getAdjList();
 
   // cout<< "The adjancency list of AUX is "<< testList["AUX"].size()<<endl;
@@ -44,24 +44,37 @@ int main(int argc, char* argv[]) {
   // }
 
 
-  g->getCoords("/Users/patrickcunningham/Programming/CPDR/data_/airports.dat.txt");
+  g->getCoords("data_/airports.dat.txt");
   std::cout << g->coords.size() << " these are the coord size"<<std::endl;
   std::cout << g->airports_.size() << " these are the list size"<<std::endl;
 
-  string lat1s = g->coords["AUX"].first;
-  string lon1s = g->coords["AUX"].second;
-  string lat2s = g->coords["MAB"].first;
-  string lon2s = g->coords["MAB"].second;
+  string lat1s = g->coords["POL"].first;
+  string lon1s = g->coords["POL"].second;
+  string lat2s = g->coords["NBO"].first;
+  string lon2s = g->coords["NBO"].second;
+  string lat3s = g->coords["BOM"].first;
+  string lon3s = g->coords["BOM"].second;
+  string lat4s = g->coords["CCU"].first;
+  string lon4s = g->coords["CCU"].second;
+  string lat5s = g->coords["KMG"].first;
+  string lon5s = g->coords["KMG"].second;
+  string lat6s = g->coords["SYM"].first;
+  string lon6s = g->coords["SYM"].second;
 
-  std::cout << g->coords["BVS"].first << std::endl;
+  //std::cout << g->coords["BVS"].first << std::endl;
 
-  double c = g->cost(lat1s, lon1s, lat2s, lon2s);
+  double c1 = g->cost(lat1s, lon1s, lat2s, lon2s);
+  double c2 = g->cost(lat2s, lon2s, lat3s, lon3s);
+  double c3 = g->cost(lat3s, lon3s, lat4s, lon4s);
+  double c4 = g->cost(lat4s, lon4s, lat5s, lon5s);
+  double c5 = g->cost(lat5s, lon5s, lat6s, lon6s);
+  double c = c1 + c2 + c3 + c4 + c5;
 
 
-  cout << "cost " << c << endl;
-
-
-  double distance_ = g->dijkstras("AUX", "MAB", "/Users/patrickcunningham/Programming/CPDR/data_/airports.dat.txt");
+  double distance_ = g->dijkstras("POL", "SYM", "data_/airports.dat.txt");
   cout<<"the shortest distance between the airports is "<<distance_<<endl;
+
+  cout << "total cost: " << c << endl;
+
   
 }
