@@ -23,4 +23,6 @@ This will prompt you to enter in an airport in the file you submitted for the so
 Build with `make tests` and `bin/tests` to run the test suite 
 Tests we have created with descriptions:
 
- - Test 1
+ - Testing adjacency list: Tests to ensure that the size of the adjacency list on a few airports is correct to show we are implementing the graph correctly
+ - Testing correct edges: Tests that the edge components are correct for a given edge between 2 airports (the parsing finds the correct information)
+ - Testing shortest path is correct: Tests BFS using an expected output on a test case file (a smaller dataset)
