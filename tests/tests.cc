@@ -53,7 +53,7 @@ TEST_CASE("Testing shortest path is correct", "[case-1]"){
 //graph, verify that the correct number of airports, correct number of unique arilines, the adjacency list is correct
 
 TEST_CASE("Shortest path test2", "[case-1]"){
-  Graph * g = new Graph("CPDR/data_/test_cases_1.txt");
+  Graph * g = new Graph("data_/test_cases_1.txt");
   REQUIRE(g->airports_.size() == 18);
   REQUIRE(g -> getAdjList().size() == 16);
 }
