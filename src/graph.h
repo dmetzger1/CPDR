@@ -33,7 +33,7 @@ class Graph {
      * @return void - maps each airport id to a pair(latitude, longtitude)
     */
     void getCoords(string filename);
-
+    pair<vector<string>, int> dijkstras(string source, string dest, string filename);
     double cost(string lat1s, string lon1s, string lat2s, string lon2s);
 
     /**
@@ -47,7 +47,6 @@ class Graph {
      */
 
     std::vector<std::string> BFS(std::string airport1, std::string airport2); //returns the path with least amount of edges between 2 vertices (DOES NOT ACCOUNT FOR STOPS OR ANY WEIGHTS)
-    double dijkstras(string source, string dest, string filename);
 
     /**
      * IDDFS Function. 
@@ -58,8 +57,9 @@ class Graph {
      * @return bool - returns true if there is a connection between airports, false otherwise
      */
 
-    bool IDDFS(std::string src, std::string target, int max_depth);
     
+    bool IDDFS(std::string src, std::string target, int max_depth);
+
     /**
      * Helper function that is used to test the effectiveness of IDDFS.
      * 

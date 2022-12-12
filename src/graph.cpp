@@ -138,9 +138,12 @@ std::vector<std::string> Graph::BFS(std::string airport1, std::string airport2) 
   return to_return;
 }
 
-double Graph::dijkstras(string source, string dest, string filename) {
+pair<vector<string>, int> Graph::dijkstras(string source, string dest, string filename) {
+  pair<vector<string>, int> return_pair;
+
   if (airports_.find(source) == airports_.end() || airports_.find(dest) == airports_.end()) { // checks if airports are in list of airports
-    return -1;
+    return_pair.second = -1;
+    return return_pair;
   }
   //creates our maps that maintain distances and visited
   map<string, double> distances;
@@ -206,7 +209,10 @@ double Graph::dijkstras(string source, string dest, string filename) {
       }
     }
   }
-
+  if(distances[dest] == INFINITY){ //checking to see if the destination was ever reaching
+    return_pair.second = 0.0;
+    return return_pair;
+  }
   //initializing shortest path
   vector<string> path;
   string cur = dest;
@@ -219,12 +225,12 @@ double Graph::dijkstras(string source, string dest, string filename) {
   }
   reverse(path.begin(), path.end());
 
-  cout<<"The shortest length path from Dijkstra's algorithm is "<< endl;
-  for(string node : path){
-    cout<<node<<endl;
-  }
+  
+   return_pair.first = path;
+   int dist_int = (int) round(distances[dest]);
+   return_pair.second = dist_int;
 
-  return distances[dest];
+  return return_pair;
 }
 
 //randomly generate graphs, randomly select two points on the graph

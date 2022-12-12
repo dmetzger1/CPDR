@@ -27,3 +27,4 @@ Tests we have created with descriptions:
  - Testing correct edges: Tests that the edge components are correct for a given edge between 2 airports (the parsing finds the correct information)
  - Testing shortest path is correct: Tests BFS using an expected output on a test case file (a smaller dataset)
  - Testing IDDFS: Tests IDDFSS using a source and destination, verifies that runtime is faster than normal DFS and that source and destination are connected.
+ - Testing shortest distance is correct: Tests Dijkstra's algorithm using an expected output for both the total shortest distance and path between two airports from a test case (a smaller dataset), as well as a couple from the larger dataset.
