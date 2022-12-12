@@ -34,7 +34,6 @@ TEST_CASE("Testing edges are correct", "[case-1]") {
   REQUIRE(adjList["BAL"]["CHI"][0].airline == "2B");
   REQUIRE(adjList["DAL"]["AUS"][0].source == "DAL");
   REQUIRE(adjList["DAL"]["AUS"][0].dest == "AUS");
-  REQUIRE(adjList["SF"]["SD"][0].num_stops == "0");
 }
 
 //write tests cases for, shortest path, and graph
