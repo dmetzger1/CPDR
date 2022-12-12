@@ -7,6 +7,7 @@ using namespace std;
 #include <string>
 #include <sstream>
 
+//Flights struct
 struct Flights{ //
     string airline;
     string airline_id;
@@ -14,11 +15,10 @@ struct Flights{ //
     string source_id;
     string dest;
     string dest_id;
-    //string codeshare;  pretty pointless, we won't have to use it and it's usually empty anyways
     string num_stops;   //might have to cast this into an integer based off our implementation
-    //int num_stops;
 };
 
+//Airport struct
 struct Airports{ //
     string IATA;
     string ICAO;
@@ -26,6 +26,9 @@ struct Airports{ //
     string longitude;
 };
 
-vector<string> data_list(string filename); //creates vector of each line in the flights dataset
-vector<Flights> data_structs(string filename);  //craetes vector of structs made from each node in the dataset
+//creates vector of each line in the flights dataset
+vector<string> data_list(string filename);
+//creates vector of structs made from each node in the dataset
+vector<Flights> data_structs(string filename); 
+//creates vector of airport structs made from each node in the dataset
 vector<Airports> aiports_data_structs(string filename);

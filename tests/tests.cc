@@ -5,10 +5,9 @@
 #include "catch.h"
 #include <string>
 
-#include "functions.hpp"
-#include "/Users/patrickcunningham/Programming/CPDR/src/parser.h"
-#include "/Users/patrickcunningham/Programming/CPDR/src/graph.h"
-#include "/Users/patrickcunningham/Programming/CPDR/src/edge.h"
+#include "../src/parser.h"
+#include "../src/graph.h"
+#include "../src/edge.h"
 
 TEST_CASE("A test case", "[case-1]") {
   bool something = true;
