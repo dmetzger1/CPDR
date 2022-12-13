@@ -13,10 +13,12 @@ To run main, run "make exec" and "bin/exec" in terminal
 
 ## Running Instructions
 Delete the original build, run `mkdir build`, `cd build`, and `cmake ..`, then:
+
 **To build and run the executable:**
 
 Build with `make` and run with `./main "input1.txt" "input2.txt" ` where `"input1.txt"` is the routes file you are inputting and `"input2.txt"` is the airports file you are inputting.
-This will prompt you to enter in an airport in the file you submitted for the source, and one for the destination. This then will be output to bin/exec which you can  see the results outputted for each algorithm.
+For example, we run ./main ../data_/routes.dat.txt ../data_/airports.dat.txt 
+This will prompt you to enter in an airport in the file you submitted for the source, and one for the destination. This then will be outputted which you can  see the results outputted for each algorithm.
 
  **To build and run the test suite:**
 
