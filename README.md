@@ -12,15 +12,15 @@ To run main, run "make exec" and "bin/exec" in terminal
  - Presentation video: The video can be found at 
 
 ## Running Instructions
-
+Delete the original build, run `mkdir build`, `cd build`, and `cmake ..`, then:
 **To build and run the executable:**
 
-Build with `make exec` and run with `bin/exec "input1.txt" "input2.txt" ` where `"input1.txt"` is the routes file you are inputting and `"input2.txt"` is the airports file you are inputting.
+Build with `make` and run with `./main "input1.txt" "input2.txt" ` where `"input1.txt"` is the routes file you are inputting and `"input2.txt"` is the airports file you are inputting.
 This will prompt you to enter in an airport in the file you submitted for the source, and one for the destination. This then will be output to bin/exec which you can  see the results outputted for each algorithm.
 
  **To build and run the test suite:**
 
-Build with `make tests` and `bin/tests` to run the test suite 
+Build with `make` and `./test` to run the test suite 
 Tests we have created with descriptions:
 
  - Testing adjacency list: Tests to ensure that the size of the adjacency list on a few airports is correct to show we are implementing the graph correctly
