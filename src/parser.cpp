@@ -1,5 +1,7 @@
 
 #include "parser.h"
+#include <algorithm>
+
 using namespace std;
 
 std::vector<string> filter = {
