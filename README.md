@@ -9,7 +9,7 @@ To run main, run "make exec" and "bin/exec" in terminal
  - Tests: All of the test cases we created for this project can be found under the "tests" folder under "tests.cc"
  - Data: All the data we used can be found under the "data_" folder
  - Written report: The written report can be found in the main directory under "results.md" 
- - Presentation video: The video can be found at 
+ - Presentation video: The video can be found at [this link](https://youtu.be/IYe8nqEj9VA)
 
 ## Running Instructions
 
