@@ -92,7 +92,7 @@ TEST_CASE("Testing shortest distance is correct", "[case-1]"){
   REQUIRE(g->dijkstras("BAL", "LAV", "../data_/test_data_2.txt").second == 0.0);
   REQUIRE(g->dijkstras("NY", "BUF", "../data_/test_data_2.txt").second == 0.0); //if two airports are not connected the distance should be 0
 
-  Graph * k = new Graph("/workspaces/cs225/CPDR/data_/routes.dat.txt"); //testing paths on the larger dataset
+  Graph * k = new Graph("../data_/routes.dat.txt"); //testing paths on the larger dataset
 
   std::vector<std::string> test4{ "APL", "JNB", "MUC", "TRS"};
   std::vector<std::string> test5{"APL", "NBO", "CAI", "ATH", "TIA", "BRI", "TRS" };
